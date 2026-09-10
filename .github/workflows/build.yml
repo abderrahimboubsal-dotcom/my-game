@@ -45,16 +45,5 @@ jobs:
         env:
           ANDROID_ACCEPT_LICENSE: "True"
         run: |
+          mkdir -p ~/.buildozer
           buildozer -v android debug
-
-      - name: Install Buildozer and Cython
-        run: |
-          pip install --upgrade pip
-          pip install cython==0.29.33
-          pip install buildozer
-
-      - name: Build with Buildozer
-        env:
-          ANDROID_ACCEPT_LICENSE: "True"
-        run: |
-          yes | buildozer -v android debug
