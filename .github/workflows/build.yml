@@ -43,9 +43,19 @@ jobs:
           pip install cython==0.29.33
           pip install buildozer
 
-      - name: Accept Licenses and Build APK
+      - name: Pre-install Android SDK Command-line Tools
+        run: |
+          ANDROID_HOME=$HOME/.buildozer/android/platform/android-sdk
+          mkdir -p $ANDROID_HOME/cmdline-tools
+          cd $ANDROID_HOME/cmdline-tools
+          curl -o commandlinetools.zip https://dl.google.com/android/repository/commandlinetools-linux-9477386_latest.zip
+          unzip -q commandlinetools.zip
+          mv cmdline-tools latest
+          mkdir -p $ANDROID_HOME/tools/bin
+          ln -s $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager $ANDROID_HOME/tools/bin/sdkmanager
+
+      - name: Build APK with Buildozer
         env:
           ANDROID_ACCEPT_LICENSE: "True"
         run: |
-          mkdir -p ~/.buildozer/android/platform/android-sdk
-          yes | buildozer -v android debug || buildozer -v android debug
+          yes | buildozer -v android debug
