@@ -8,3 +8,4 @@ requirements = python3,pygame
 orientation = portrait
 fullscreen = 0
 android.permissions = INTERNET
+source.dir=.
