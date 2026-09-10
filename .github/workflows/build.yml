@@ -50,3 +50,4 @@ jobs:
           ANDROID_ACCEPT_LICENSE: "True"
         run: |
           yes | buildozer -v android debug
+
